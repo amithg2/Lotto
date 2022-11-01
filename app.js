@@ -19,6 +19,8 @@ function buildHtmlForLotto() {
   body.removeChild(settings);
   const lottoWrapper = document.createElement("div");
   lottoWrapper.id = "lotto-wrapper";
+  lottoWrapper.className = "card";
+
   //build the input of each user
   for (let user = 1; user <= numOfPlayers; user++) {
     //object to follow data
@@ -44,6 +46,8 @@ function buildHtmlForLotto() {
     //button to genereate random number
     const randNumButton = document.createElement("button");
     randNumButton.innerText = "Random";
+    randNumButton.classList.add('button')
+    randNumButton.classList.add('random-button')
     randNumButton.onclick = () => {
       const numbers = generateLottoNumbers();
 
@@ -75,21 +79,30 @@ function buildHtmlForLotto() {
     lottoWrapper.prepend(lottoRoundsCounter);
   }
 
+  //buttons wrapper
+  const buttonsWrapper = document.createElement("div");
+  buttonsWrapper.className = "buttons-wrapper";
+
   //button to start lotto
   const buttonToStartLotto = document.createElement("button");
   buttonToStartLotto.innerText = "START LOTTO";
+  buttonToStartLotto.className = "button";
   buttonToStartLotto.onclick = () => lottoButtonClicked();
-
+  
   //button to restart lotto
   const buttonToRestartLotto = document.createElement("button");
   buttonToRestartLotto.innerText = "RESTART";
+  buttonToRestartLotto.classList.add("button");
+  buttonToRestartLotto.classList.add("restart-button");
   buttonToRestartLotto.onclick = () => {
     body.removeChild(lottoWrapper);
     body.appendChild(settings);
   };
 
-  lottoWrapper.appendChild(buttonToStartLotto);
-  lottoWrapper.appendChild(buttonToRestartLotto);
+  buttonsWrapper.appendChild(buttonToStartLotto);
+  buttonsWrapper.appendChild(buttonToRestartLotto);
+
+  lottoWrapper.appendChild(buttonsWrapper);
 
   body.appendChild(lottoWrapper);
 }

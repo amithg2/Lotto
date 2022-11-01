@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap");
+
 body {
   margin: 0;
   padding: 0;
@@ -7,13 +9,29 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  font-family: "Roboto Condensed", sans-serif;
+  background: rgb(16, 10, 118);
+  background: linear-gradient(
+    151deg,
+    rgba(16, 10, 118, 1) 0%,
+    rgba(51, 51, 201, 1) 22%,
+    rgba(88, 214, 239, 1) 100%
+  );
 }
 
 #settings-wrapper {
   width: 350px;
-  border: 2px solid red;
   display: flex;
   flex-direction: column;
+}
+
+#lotto-wrapper {
+}
+
+.card {
+  background-color: rgb(239, 246, 252);
+  border-radius: 10px;
+  border: 4px solid #d4e8f9;
   padding: 10px 20px;
 }
 
@@ -31,8 +49,9 @@ body {
   width: 185px;
 }
 
-.start-button {
-  margin: auto;
+.buttons-wrapper {
+  display: flex;
+  margin: 10px;
 }
 
 .user-selected-numbers-title {
@@ -54,4 +73,67 @@ body {
   width: 30px;
   padding: 5px;
   margin: 0px 5px;
+}
+
+/* select */
+select {
+  /* Reset Select */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  color: #fff;
+  background-color: #34495e;
+  background-image: none;
+  cursor: pointer;
+}
+
+.select {
+  position: relative;
+  display: flex;
+  width: 40px;
+  height: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* BUTTON */
+.button {
+  cursor: pointer;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+  border-radius: 6px;
+  border: none;
+  color: #fff;
+  background: linear-gradient(180deg, #4b91f7 0%, #367af6 100%);
+  background-origin: border-box;
+  box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
+    inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:hover {
+  box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
+    0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
+    0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+  outline: 0;
+}
+
+.restart-button {
+  background: linear-gradient(180deg, #7b7e83 0%, #b7bbc3 100%);
+}
+
+.random-button {
+  background: linear-gradient(180deg, #7b7e83 0%, #b7bbc3 100%);
+  padding: 5px;
+  margin: 0 5px;
 }
