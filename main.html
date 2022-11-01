@@ -4,17 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Lotto</title>
   </head>
   <body>
-    <div id="main-element">
-      <div id="show-numbers"></div>
-      <input type="number" id="ball1" />
-      <input type="number" id="ball2" />
-      <input type="number" id="ball3" />
-      <input type="number" id="ball4" />
-      <input type="number" id="ball5" />
-      <input type="number" id="ball6" />
+    <div id="main-element" class="main-element">
+      <div class="user">
+        <span class="user-selected-numbers-title"
+          >You selected the numbers:
+        </span>
+        <div id="selected-numbers" class="selected-numbers"></div>
+      </div>
+      <div class="inputs">
+        <input type="number" id="ball1" class="number-input" min="0" max="37" />
+        <input type="number" id="ball2" class="number-input" min="0" max="37" />
+        <input type="number" id="ball3" class="number-input" min="0" max="37" />
+        <input type="number" id="ball4" class="number-input" min="0" max="37" />
+        <input type="number" id="ball5" class="number-input" min="0" max="37" />
+        <input type="number" id="ball6" class="number-input" min="0" max="37" />
+      </div>
+
+      <!-- <button onclick="startLotto">start</button> -->
     </div>
 
     <script src="./app.js"></script>

@@ -1,7 +1,7 @@
 const numOfLottoNumbers = 6;
 const arrOfNumbers = [0, 0, 0, 0, 0, 0];
 const balls = {};
-const numbers = document.querySelector('#show-numbers')
+const numbers = document.querySelector('#selected-numbers')
 
 const numChanged = (num, idx) => {
   arrOfNumbers.splice(idx -1, 1, +num);
