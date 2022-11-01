@@ -3,14 +3,36 @@ body {
   padding: 0;
   height: 100vh;
   width: 100vw;
-}
-
-.main-element {
-  padding: 40px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+#settings-wrapper {
+  width: 350px;
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.heading-h1 {
+  text-align: center;
+  margin: 0;
+}
+
+.settings-select {
+  margin: 10px 0;
+  display: flex;
+}
+
+.settings-select-label {
+  width: 185px;
+}
+
+.start-button {
+  margin: auto;
 }
 
 .user-selected-numbers-title {
@@ -25,7 +47,7 @@ body {
 }
 
 .inputs {
-display: flex;
+  display: flex;
 }
 
 .number-input {

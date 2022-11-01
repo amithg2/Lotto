@@ -8,9 +8,37 @@
     <title>Lotto</title>
   </head>
   <body>
-    <div id="main-element" class="main-element">
-        
-      <button onclick="startLotto()">start</button>
+    <div id="settings-wrapper">
+      <h1 class="heading-h1">LOTTO SIMULATOR</h1>
+
+      <div class="settings-select">
+        <label for="num-of-playeres" class="settings-select-label"
+          >Number of players:</label
+        >
+        <select id="num-of-playeres">
+          <option value="1">1</option>
+          <option value="2" selected>2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
+      </div>
+
+      <div class="settings-select">
+        <label for="num-of-balls" class="settings-select-label"
+          >Number of lotto balls:</label
+        >
+        <select id="num-of-balls">
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6" selected>6</option>
+          <option value="7">7</option>
+        </select>
+      </div>
+
+      <button class="start-button" onclick="buildHtmlForLotto()">START</button>
     </div>
 
     <script src="./app.js"></script>
