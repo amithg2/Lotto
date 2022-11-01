@@ -1,4 +1,4 @@
-let numOfPlayers = 3;
+let numOfPlayers = 2;
 
 const numOfLottoNumbers = 6;
 const arrOfNumbers = [0, 0, 0, 0, 0, 0];
@@ -6,20 +6,20 @@ const balls = {};
 
 const mainElement = document.querySelector("#main-element");
 
-const players = [];
 //build the input of each user
+const players = [];
 
 for (let user = 1; user <= numOfPlayers; user++) {
+  //object to follow data
   const player = {
     playerNumber: user,
   };
   player.balls = Array.from("0".repeat(numOfLottoNumbers)).map((el) => 0);
-
   players.push(player);
+
   //the base element
   const userElement = document.createElement("div");
   userElement.className = "user";
-  userElement.id = `user-${user}`;
 
   //the title
   const titleForUser = document.createElement("span");
@@ -29,6 +29,20 @@ for (let user = 1; user <= numOfPlayers; user++) {
   //the inputs
   const inputsWrapper = document.createElement("div");
   inputsWrapper.className = "inputs";
+
+  //button to genereate random number
+  const randNumButton = document.createElement("button");
+  randNumButton.innerText = "Random";
+  randNumButton.onclick = () => {
+    const numbers = generateLottoNumbers();
+
+    for (let i = 0; i < numbers.length; i++) {
+      const input = document.querySelector(`#ball-${user}-${i}`);
+      input.value = numbers[i];
+
+      players[user - 1].balls = numbers;
+    }
+  };
 
   for (let i = 0; i < numOfLottoNumbers; i++) {
     const input = document.createElement("input");
@@ -42,6 +56,7 @@ for (let user = 1; user <= numOfPlayers; user++) {
 
     inputsWrapper.appendChild(input);
   }
+  inputsWrapper.appendChild(randNumButton);
 
   userElement.appendChild(titleForUser);
   userElement.appendChild(inputsWrapper);
@@ -56,33 +71,41 @@ const numChanged = (userNumber, num, idx) => {
   });
 };
 
-// for (let i = 1; i <= numOfLottoNumbers; i++) {
-//   balls[`ball${i}`] = document.querySelector(`#ball${i}`);
-//   balls[`ball${i}`].addEventListener("change", (e) =>
-//     numChanged(e.target.value, i)
-//   );
-// }
+//button to start lotto
+const buttonToStartLotto = document.createElement("button");
+buttonToStartLotto.innerText = "START LOTTO";
+buttonToStartLotto.onclick = () => startLotto();
 
-// function generateLottoNumbers() {
-//   //generate lotto numbers
-//   const lottoNumbers = [];
-//   while (lottoNumbers.length < numOfLottoNumbers) {
-//     const num = Math.floor(Math.random() * 37 + 1);
-//     if (!lottoNumbers.includes(num)) lottoNumbers.push(num);
-//   }
-//   return lottoNumbers;
-// }
+function startLotto() {
+  let counter = 0;
+  let winner = null;
 
-// function startLotto() {
-//   let counter = 0;
+  while (true) {
+    const lottoNumbers = generateLottoNumbers();
 
-//   while (true) {
-//     const lottoNumbers = generateLottoNumbers();
+    for (player of players) {
+      const isEqual = player.balls.every((el) => lottoNumbers.includes(el));
+      if (isEqual) {
+        winner = player;
+        break;
+      }
+    }
 
-//     const isEqual = lottoNumbers.every((el) => arrOfNumbers.includes(el));
-//     if (isEqual) {
-//       break;
-//     }
-//     counter++;
-//   }
-// }
+    if (winner !== null) break;
+
+    counter++;
+  }
+  console.log(counter);
+  console.log(winner);
+  //something with the winner
+}
+
+function generateLottoNumbers() {
+  //generate lotto numbers
+  const lottoNumbers = [];
+  while (lottoNumbers.length < numOfLottoNumbers) {
+    const num = Math.floor(Math.random() * 37 + 1);
+    if (!lottoNumbers.includes(num)) lottoNumbers.push(num);
+  }
+  return lottoNumbers;
+}

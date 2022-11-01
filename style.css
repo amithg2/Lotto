@@ -24,6 +24,10 @@ body {
   flex-direction: column;
 }
 
+.inputs {
+display: flex;
+}
+
 .number-input {
   width: 30px;
   padding: 5px;
