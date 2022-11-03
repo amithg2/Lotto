@@ -25,9 +25,6 @@ body {
   flex-direction: column;
 }
 
-#lotto-wrapper {
-}
-
 .card {
   background-color: rgb(239, 246, 252);
   border-radius: 10px;
@@ -121,6 +118,11 @@ select {
   touch-action: manipulation;
 }
 
+.start-button-disabled {
+  margin: auto;
+  padding: 4px 12px;
+}
+
 .button:hover {
   box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
     0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
@@ -136,4 +138,20 @@ select {
   background: linear-gradient(180deg, #7b7e83 0%, #b7bbc3 100%);
   padding: 5px;
   margin: 0 5px;
+}
+
+.winner-wrapper {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+.loading-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 5;
 }

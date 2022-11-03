@@ -4,7 +4,6 @@ const players = [];
 
 const body = document.querySelector("body");
 const settings = document.querySelector("#settings-wrapper");
-const lottoRoundsCounter = document.createElement("span");
 
 const numOfPlayerSelector = document.querySelector("#num-of-playeres");
 numOfPlayerSelector.value = 2;
@@ -14,6 +13,7 @@ const numOfLottoNumbersSelector = document.querySelector("#num-of-balls");
 numOfLottoNumbersSelector.value = 6;
 numOfLottoNumbersSelector.onchange = (e) =>
   (numOfLottoNumbers = e.target.value);
+
 
 function buildHtmlForLotto() {
   body.removeChild(settings);
@@ -46,8 +46,8 @@ function buildHtmlForLotto() {
     //button to genereate random number
     const randNumButton = document.createElement("button");
     randNumButton.innerText = "Random";
-    randNumButton.classList.add('button')
-    randNumButton.classList.add('random-button')
+    randNumButton.classList.add("button");
+    randNumButton.classList.add("random-button");
     randNumButton.onclick = () => {
       const numbers = generateLottoNumbers();
 
@@ -57,6 +57,7 @@ function buildHtmlForLotto() {
 
         players[user - 1].balls = numbers;
       }
+      checkIfStartButtonDisabled();
     };
 
     for (let i = 0; i < numOfLottoNumbers; i++) {
@@ -76,7 +77,6 @@ function buildHtmlForLotto() {
     userElement.appendChild(titleForUser);
     userElement.appendChild(inputsWrapper);
     lottoWrapper.appendChild(userElement);
-    lottoWrapper.prepend(lottoRoundsCounter);
   }
 
   //buttons wrapper
@@ -86,15 +86,22 @@ function buildHtmlForLotto() {
   //button to start lotto
   const buttonToStartLotto = document.createElement("button");
   buttonToStartLotto.innerText = "START LOTTO";
-  buttonToStartLotto.className = "button";
+  buttonToStartLotto.className = "start-button-disabled";
+  buttonToStartLotto.id = "start-button";
+  buttonToStartLotto.disabled = true;
+
   buttonToStartLotto.onclick = () => lottoButtonClicked();
-  
+
   //button to restart lotto
   const buttonToRestartLotto = document.createElement("button");
   buttonToRestartLotto.innerText = "RESTART";
+  buttonToRestartLotto.id = "restart-button";
   buttonToRestartLotto.classList.add("button");
   buttonToRestartLotto.classList.add("restart-button");
   buttonToRestartLotto.onclick = () => {
+    players.length = 0;
+    const winner = document.querySelector("#winner-wrapper");
+    if (winner) lottoWrapper.removeChild(winner);
     body.removeChild(lottoWrapper);
     body.appendChild(settings);
   };
@@ -107,38 +114,92 @@ function buildHtmlForLotto() {
   body.appendChild(lottoWrapper);
 }
 
+function buildWinnerHtml(result) {
+  const winnerWrraper = document.createElement("div");
+  winnerWrraper.className = "winner-wrapper";
+  winnerWrraper.id = "winner-wrapper";
+  const lottoWrapper = document.querySelector("#lotto-wrapper");
+
+  const winnerPlayer = document.createElement("h3");
+  const lottoRoundsCounter = document.createElement("span");
+
+  winnerPlayer.innerText = `The winner is player ${result.player.playerNumber}!`;
+
+  winnerWrraper.appendChild(winnerPlayer);
+  winnerWrraper.appendChild(lottoRoundsCounter);
+  lottoWrapper.appendChild(winnerWrraper);
+
+  for (let i = 0; i <= result.counter; i++) {
+    setTimeout(
+      () => {
+        lottoRoundsCounter.innerHTML = `It took ${i} lotto rounds to find a winner!`;
+      },
+      result.counter > 1000000 ? 1 : 2
+    );
+  }
+}
+
 const numChanged = (userNumber, num, idx) => {
   players[userNumber - 1].balls = players[userNumber - 1].balls.map((el, i) => {
     if (i !== idx) return el;
     return +num;
   });
+
+  checkIfStartButtonDisabled();
 };
 
-function startLotto() {
-  let counter = 0;
+function startLotto() {  
+    let counter = 0;
+    const startButton = document.querySelector("#start-button");
+    const restartButton = document.querySelector("#restart-button");
+    restartButton.className = "button";
 
-  while (true) {
-    const lottoNumbers = generateLottoNumbers();
-    for (player of players) {
-      const isEqual = player.balls.every((el) => lottoNumbers.includes(el));
-      if (isEqual) {
-        return { player, counter };
+    startButton.disabled = true;
+    startButton.className = "start-button-disabled";
+
+    while (true) {
+      const lottoNumbers = generateLottoNumbers();
+      for (player of players) {
+        const isEqual = player.balls.every((el) => lottoNumbers.includes(el));
+        if (isEqual) {
+          return { player, counter };
+        }
       }
+      counter++;
     }
-    counter++;
+}
+
+function findDuplicates(arr) {
+  return arr.filter((item, index) => arr.indexOf(item) != index);
+}
+
+function checkIfStartButtonDisabled() {
+  const startButton = document.querySelector("#start-button");
+  if (!startButton) return;
+  const isSomePlayerBallsNotValid = players.some((player) => {
+    // if the number of some ball is not valid
+    if (player.balls.some((ball) => ball > 37 || ball < 1)) return true;
+
+    //if there are duplications in the balls
+    const duplicates = findDuplicates(player.balls);
+    if (duplicates.length) return true;
+    return false;
+  });
+
+  if (isSomePlayerBallsNotValid) {
+    startButton.disabled = true;
+    startButton.className = "start-button-disabled";
+    return;
   }
+  startButton.className = "button";
+  startButton.disabled = false;
 }
 
 function lottoButtonClicked() {
   const result = startLotto();
 
-  for (let i = 0; i <= result.counter; i++) {
-    setTimeout(() => {
-      lottoRoundsCounter.innerHTML = i;
-    }, 2);
-  }
-
   //do something with the winner
+  buildWinnerHtml(result);
 }
 
 function generateLottoNumbers() {
