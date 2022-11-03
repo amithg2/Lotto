@@ -19,6 +19,7 @@ body {
   );
 }
 
+/* FIRST PAGE - SETTINGS */
 #settings-wrapper {
   width: 350px;
   display: flex;
@@ -32,7 +33,7 @@ body {
   padding: 10px 20px;
 }
 
-.heading-h1 {
+h1 {
   text-align: center;
   margin: 0;
 }
@@ -46,6 +47,31 @@ body {
   width: 185px;
 }
 
+select {
+  /* Reset Select */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  color: #fff;
+  background-color: #34495e;
+  background-image: none;
+  cursor: pointer;
+}
+
+.select {
+  position: relative;
+  display: flex;
+  width: 40px;
+  height: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* LOTTO PAGE */
 .buttons-wrapper {
   display: flex;
   margin: 10px;
@@ -72,32 +98,24 @@ body {
   margin: 0px 5px;
 }
 
-/* select */
-select {
-  /* Reset Select */
-  appearance: none;
-  outline: 0;
-  border: 0;
-  box-shadow: none;
-  /* Personalize */
-  flex: 1;
-  padding: 0 1em;
-  color: #fff;
-  background-color: #34495e;
-  background-image: none;
-  cursor: pointer;
+/*WINNER PAGE*/
+.winner-wrapper {
+  margin: auto;
+  width: 100%;
+  text-align: center;
 }
 
-.select {
-  position: relative;
-  display: flex;
-  width: 40px;
-  height: 20px;
-  border-radius: 5px;
-  overflow: hidden;
+.loading-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 5;
 }
 
-/* BUTTON */
+/* BUTTONS */
 .button {
   cursor: pointer;
   margin: auto;
@@ -138,20 +156,4 @@ select {
   background: linear-gradient(180deg, #7b7e83 0%, #b7bbc3 100%);
   padding: 5px;
   margin: 0 5px;
-}
-
-.winner-wrapper {
-  margin: auto;
-  width: 100%;
-  text-align: center;
-}
-
-.loading-wrapper {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 5;
 }

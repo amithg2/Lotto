@@ -5,6 +5,7 @@ const players = [];
 const body = document.querySelector("body");
 const settings = document.querySelector("#settings-wrapper");
 
+//bind the selectors to the varibles
 const numOfPlayerSelector = document.querySelector("#num-of-playeres");
 numOfPlayerSelector.value = 2;
 numOfPlayerSelector.onchange = (e) => (numOfPlayers = e.target.value);
@@ -14,7 +15,88 @@ numOfLottoNumbersSelector.value = 6;
 numOfLottoNumbersSelector.onchange = (e) =>
   (numOfLottoNumbers = e.target.value);
 
+//==============================================================
+//==================HELP FUNCTIONS==============================
+//==============================================================
+const numChanged = (userNumber, num, idx) => {
+  players[userNumber - 1].balls = players[userNumber - 1].balls.map((el, i) => {
+    if (i !== idx) return el;
+    return +num;
+  });
 
+  checkIfStartButtonDisabled();
+};
+
+//start lotto
+function startLotto() {
+  let counter = 0;
+  const startButton = document.querySelector("#start-button");
+  const restartButton = document.querySelector("#restart-button");
+  restartButton.className = "button";
+
+  startButton.disabled = true;
+  startButton.className = "start-button-disabled";
+
+  while (true) {
+    const lottoNumbers = generateLottoNumbers();
+    for (player of players) {
+      const isEqual = player.balls.every((el) => lottoNumbers.includes(el));
+      if (isEqual) {
+        return { player, counter };
+      }
+    }
+    counter++;
+  }
+}
+
+//find duplicates
+function findDuplicates(arr) {
+  return arr.filter((item, index) => arr.indexOf(item) != index);
+}
+
+//when input is changed check if this is a vaild lotto
+function checkIfStartButtonDisabled() {
+  const startButton = document.querySelector("#start-button");
+  if (!startButton) return;
+  const isSomePlayerBallsNotValid = players.some((player) => {
+    // if the number of some ball is not valid
+    if (player.balls.some((ball) => ball > 37 || ball < 1)) return true;
+
+    //if there are duplications in the balls
+    const duplicates = findDuplicates(player.balls);
+    if (duplicates.length) return true;
+    return false;
+  });
+
+  if (isSomePlayerBallsNotValid) {
+    startButton.disabled = true;
+    startButton.className = "start-button-disabled";
+    return;
+  }
+  startButton.className = "button";
+  startButton.disabled = false;
+}
+
+function lottoButtonClicked() {
+  const result = startLotto();
+
+  buildWinnerHtml(result);
+}
+
+//function to get lotto numbers dependes on the num of lotto numbers  
+function generateLottoNumbers() {
+  const lottoNumbers = [];
+  while (lottoNumbers.length < numOfLottoNumbers) {
+    const num = Math.floor(Math.random() * 37 + 1);
+    if (!lottoNumbers.includes(num)) lottoNumbers.push(num);
+  }
+  return lottoNumbers;
+}
+
+//==============================================================
+//==================HTML BUILDES================================
+//==============================================================
+//base lotto html
 function buildHtmlForLotto() {
   body.removeChild(settings);
   const lottoWrapper = document.createElement("div");
@@ -60,6 +142,7 @@ function buildHtmlForLotto() {
       checkIfStartButtonDisabled();
     };
 
+    //build input for each number 
     for (let i = 0; i < numOfLottoNumbers; i++) {
       const input = document.createElement("input");
       input.type = "number";
@@ -72,14 +155,14 @@ function buildHtmlForLotto() {
 
       inputsWrapper.appendChild(input);
     }
-    //build the html
+
     inputsWrapper.appendChild(randNumButton);
     userElement.appendChild(titleForUser);
     userElement.appendChild(inputsWrapper);
     lottoWrapper.appendChild(userElement);
   }
 
-  //buttons wrapper
+  //start and restart buttons wrapper
   const buttonsWrapper = document.createElement("div");
   buttonsWrapper.className = "buttons-wrapper";
 
@@ -114,6 +197,7 @@ function buildHtmlForLotto() {
   body.appendChild(lottoWrapper);
 }
 
+//show winner 
 function buildWinnerHtml(result) {
   const winnerWrraper = document.createElement("div");
   winnerWrraper.className = "winner-wrapper";
@@ -137,77 +221,4 @@ function buildWinnerHtml(result) {
       result.counter > 1000000 ? 1 : 2
     );
   }
-}
-
-const numChanged = (userNumber, num, idx) => {
-  players[userNumber - 1].balls = players[userNumber - 1].balls.map((el, i) => {
-    if (i !== idx) return el;
-    return +num;
-  });
-
-  checkIfStartButtonDisabled();
-};
-
-function startLotto() {  
-    let counter = 0;
-    const startButton = document.querySelector("#start-button");
-    const restartButton = document.querySelector("#restart-button");
-    restartButton.className = "button";
-
-    startButton.disabled = true;
-    startButton.className = "start-button-disabled";
-
-    while (true) {
-      const lottoNumbers = generateLottoNumbers();
-      for (player of players) {
-        const isEqual = player.balls.every((el) => lottoNumbers.includes(el));
-        if (isEqual) {
-          return { player, counter };
-        }
-      }
-      counter++;
-    }
-}
-
-function findDuplicates(arr) {
-  return arr.filter((item, index) => arr.indexOf(item) != index);
-}
-
-function checkIfStartButtonDisabled() {
-  const startButton = document.querySelector("#start-button");
-  if (!startButton) return;
-  const isSomePlayerBallsNotValid = players.some((player) => {
-    // if the number of some ball is not valid
-    if (player.balls.some((ball) => ball > 37 || ball < 1)) return true;
-
-    //if there are duplications in the balls
-    const duplicates = findDuplicates(player.balls);
-    if (duplicates.length) return true;
-    return false;
-  });
-
-  if (isSomePlayerBallsNotValid) {
-    startButton.disabled = true;
-    startButton.className = "start-button-disabled";
-    return;
-  }
-  startButton.className = "button";
-  startButton.disabled = false;
-}
-
-function lottoButtonClicked() {
-  const result = startLotto();
-
-  //do something with the winner
-  buildWinnerHtml(result);
-}
-
-function generateLottoNumbers() {
-  //generate lotto numbers
-  const lottoNumbers = [];
-  while (lottoNumbers.length < numOfLottoNumbers) {
-    const num = Math.floor(Math.random() * 37 + 1);
-    if (!lottoNumbers.includes(num)) lottoNumbers.push(num);
-  }
-  return lottoNumbers;
 }
