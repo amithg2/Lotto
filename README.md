@@ -9,24 +9,17 @@
 
 ### Built with ❤️, HTML, Vanilla javaScript and css. 
 
-# Main Section
+# Project Files
 
-## Subsection 1
+- src
+  - components
+    - Button.vue
+    - Modal.vue
+  - views
+    - Home.vue
+    - About.vue
+- public
+  - index.html
+- package.json
+- README.md
 
-### Subsubsection 1.1
-
-Some content for Subsubsection 1.1.
-
-### Subsubsection 1.2
-
-Some content for Subsubsection 1.2.
-
-## Subsection 2
-
-Some content for Subsection 2.
-
-# Another Main Section
-
-## Subsection 3
-
-Some content for Subsection 3.
