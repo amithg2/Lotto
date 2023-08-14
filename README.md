@@ -36,7 +36,46 @@ This application features two distinct screens, each providing valuable insights
 
 ## Files structure
 
-ADSSDSDASDADASD
+-   src
+    -   App.vue
+    -   helpers.js
+    -   main.js
+    -   quasar-user-options.js
+    -   testHelpers.js
+    -   components
+        -   ClientData.vue
+        -   Loader.vue
+        -   Welcome.vue
+        -   Powercom
+            -   Powercom.vue
+            -   components
+                -   Metercards
+                    -   Metercards.vue
+                    -   components
+                        -   MetercardEditRow.vue
+                        -   MetercardRow.vue
+    -   router
+        -   index.js
+    -   store
+        -   editedMetercard.js
+        -   invoice.js
+    -   styles
+        -   layout.colorpalette.scss
+        -   layout.fonts.scss
+        -   layout.general.scss
+        -   quasar.scss
+        -   quasar.variables.scss
+    -   views
+        -   client-screen
+            -   Client.vue
+            -   components
+                -   TopClient.vue
+        -   invoice-screen
+            -   Invoice.vue
+            -   components
+                -   TopInvoice.vue
+                -   components
+                    -   ProgressBar.vue
 
 ## Routing
 
@@ -95,7 +134,7 @@ Both the central components, Invoice and Client, share a common child component 
 
 ```mermaid
 graph TD
-  A[Powercom]
+  A[Powercoms]
   B[Metercard]
   C[Regular Row]
   D[Edited Row]
