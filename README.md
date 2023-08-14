@@ -30,7 +30,31 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # Documentation
 
-## File structue
+## Overview
+
+This application features two distinct screens, each providing valuable insights into metercards. These perspectives offer detailed information from both an invoice and a client point of view.
+
+## Files structure
+
+ADSSDSDASDADASD
+
+## Routing
+
+The application primarily comprises just two main routes, leading users to either the Client screen or the Invoice screen.
+
+## State Management
+
+Within the application, there are two distinct stores responsible for managing data:
+
+### Invoice Store
+
+This primary store handles application data and is referred to as the "invoice store." While it's the main store for the application, it also caters to the client screen. Notably, the client screen lacks "invoice" data, setting it apart from the invoice screen.
+
+### Edit Metercard Store
+
+The second store is dedicated to tracking changes in the edited Metercard values. This store focuses on providing a clear overview of any modifications made to the edited Metercard data.
+
+## Components Structure
 
 ```mermaid
 graph TD
@@ -61,7 +85,33 @@ graph TD
   G --> H
   H --> I
   G --> J
+```
 
-## SSD
+### Explain
 
-some text
+Both the central components, Invoice and Client, share a common child component known as Powercoms.
+
+### The powercoms component structure
+
+```mermaid
+graph TD
+  A[Powercom]
+  B[Metercard]
+  C[Regular Row]
+  D[Edited Row]
+
+ %% Set node colors
+  style A fill:#ff9999,stroke:#ff6666
+  style B fill:#ff9999,stroke:#ff6666
+  style C fill:#ff9999,stroke:#ff6666
+  style D fill:#ff9999,stroke:#ff6666
+
+  A --> B
+  B --> C
+  B --> D
+
+```
+
+### Explain
+
+Each Powercom is associated with multiple Metercards. Certain Metercards have the potential to be edited, allowing users to transform a "Regular" Metercard into an "Edited" Row by clicking the "Edit" icon. Notably, whenever a new Metercard is added, it is introduced as an "Edited" Metercard right from the outset.
