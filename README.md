@@ -36,6 +36,10 @@ graph TD
   I[Client Data]
   J[Powercoms]
 
+  %% Set node colors
+  style F fill:#ff9999,stroke:#ff6666
+  style I fill:#99ff99,stroke:#66ff66
+
   A --> B
   B --> C
   C --> D
@@ -45,6 +49,5 @@ graph TD
   G --> H
   H --> I
   G --> J
-
 
 
