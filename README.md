@@ -50,4 +50,49 @@ graph TD
   H --> I
   G --> J
 
+graph TD
+  A[Powercom]
+  B[Powercom 1]
+  C[Metercard 1]
+  D[Regular Row]
+  E[Edited Row]
+  F[Metercard 2]
+  G[Metercard 3]
+  H[Powercom 2]
+  I[Metercard 1]
+  J[Metercard 2]
+  K[Powercom 3]
+  L[Metercard 1]
+  M[Metercard 2]
+
+  %% Set node colors
+  style A fill:#ff9999,stroke:#ff6666
+  style B fill:#ff9999,stroke:#ff6666
+  style C fill:#ff9999,stroke:#ff6666
+  style D fill:#ff9999,stroke:#ff6666
+  style E fill:#ff9999,stroke:#ff6666
+  style F fill:#ff9999,stroke:#ff6666
+  style G fill:#ff9999,stroke:#ff6666
+  style H fill:#ff9999,stroke:#ff6666
+  style I fill:#ff9999,stroke:#ff6666
+  style J fill:#ff9999,stroke:#ff6666
+  style K fill:#ff9999,stroke:#ff6666
+  style L fill:#ff9999,stroke:#ff6666
+  style M fill:#ff9999,stroke:#ff6666
+
+  A --> B
+  B --> C
+  C --> D
+  C --> E
+  B --> F
+  B --> G
+  A --> H
+  H --> I
+  H --> J
+  A --> K
+  K --> L
+  K --> M
+
+
+
 
