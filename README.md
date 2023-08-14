@@ -1,27 +1,36 @@
-# Lotto Simulator
+# fdy
 
-### A small lotto simulator that simulates how many rounds it will take players to win the lottery 
+## Project setup.
 
-## Main 
+```
+npm install
+```
 
-- The user can choose how many players play.
-- The user can choose how many lotto balls will generate (4 to 7).
+### Compiles and hot-reloads for development
 
-### Built with ❤️, HTML, Vanilla javaScript and css. 
+```
+npm run serve
+```
 
-# Project Files
+### Compiles and minifies for production
 
-- src
-  - components
-    - Button.vue
-    - Modal.vue
-  - views
-    - Home.vue
-    - About.vue
-- public
-  - index.html
-- package.json
-- README.md
+```
+npm run build
+```
+
+### Lints and fixes files
+
+```
+npm run lint
+```
+
+### Customize configuration
+
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
+# Documentation
+
+## File structue
 
 ```mermaid
 graph TD
@@ -52,3 +61,7 @@ graph TD
   G --> H
   H --> I
   G --> J
+
+## SSD
+
+some text
