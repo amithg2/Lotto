@@ -25,14 +25,26 @@
 
 ```mermaid
 graph TD
-  A[Invoice]
-  B[Top Invoice]
-  C[ProgressData]
-  D[Client data]
+  A[App]
+  B[Invoice]
+  C[Top Invoice]
+  D[Progress Bar Data]
+  E[Client data]
+  F[Powercoms]
+  G[Client]
+  H[Top Client]
+  I[Client Data]
+  J[Powercoms]
 
   A --> B
   B --> C
-  B --> D
+  C --> D
+  C --> E
+  B --> F
+  A --> G
+  G --> H
+  H --> I
+  G --> J
 
 
 
